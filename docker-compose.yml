@@ -5,7 +5,7 @@ services:
     image: lab:latest
     volumes:
       - .:/home/bram # mount the source code
-      - ${HOME}/.ssh:/home/zepp/.ssh # your ssh keys
+      - ${HOME}/.ssh:/home/bram/.ssh # your ssh keys
     ports:
       - 8888:8888
     command:
