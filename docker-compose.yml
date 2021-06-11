@@ -1,0 +1,17 @@
+version: '3.5'
+
+services:
+  lab:
+    image: lab:latest
+    volumes:
+      - .:/home/bram # mount the source code
+      - ${HOME}/.ssh:/home/zepp/.ssh # your ssh keys
+    ports:
+      - 8888:8888
+    command:
+      - jupyter
+      - lab
+      - --LabApp.token=''
+      - --ip=0.0.0.0
+      - --no-browser
+
