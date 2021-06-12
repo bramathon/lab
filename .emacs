@@ -68,6 +68,12 @@
   (lsp-enable-snippet nil)
   (lsp-prefer-flymake nil))
 
+(use-package lsp-pyright
+  :ensure t
+  :hook (python-mode . (lambda ()
+                          (require 'lsp-pyright)
+                          (lsp))))
+
 (use-package lsp-treemacs :commands lsp-treemacs-errors-list)
 
 (use-package helm-lsp :commands helm-lsp-workspace-symbol)
@@ -75,8 +81,6 @@
 (use-package lsp-ui
   :commands lsp-ui-mode
   :config
-  ;; (define-key lsp-ui-mode-map [remap xref-find-definitions] #'lsp-ui-peek-find-definitions)
-  ;; (define-key lsp-ui-mode-map [remap xref-find-references] #'lsp-ui-peek-find-references)
   (define-key lsp-ui-mode-map [remap xref-find-apropos] #'helm-lsp-workspace-symbol)
   (setq lsp-ui-doc-position 'top
         lsp-ui-imenu-enable t
@@ -92,7 +96,6 @@
     :defer 2
     :diminish
     :custom
-    ;;(add-to-list 'company-backends 'company-jedi)
     (company-begin-commands '(self-insert-command))
     (company-idle-delay .1)
     (company-minimum-prefix-length 2)

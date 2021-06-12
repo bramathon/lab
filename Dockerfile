@@ -48,17 +48,13 @@ RUN curl -sL https://deb.nodesource.com/setup_14.x | bash - \
     && ln -sf $(which python3.8) $(which python || echo '/usr/local/bin/python') \
     && ln -sf $(which python3.8) $(which python3 || echo '/usr/local/bin/python3')
 
+RUN npm install -g pyright
+
 # Install the python packages
 COPY requirements.txt ./
 RUN PIP_NO_CACHE_DIR=1 \
     PIP_UPGRADE=1 \
     pip install -r requirements.txt
-
-# Allow jupyter to render plotly plots
-# RUN jupyter labextension install --no-build \
-#         jupyterlab-plotly@4.14.3 \
-#         plotlywidget@4.14.3 \
-#     && jupyter lab build
 
 COPY --chown=${USER}:${USER} plugin.jupyterlab-settings /home/${USER}/.jupyter/lab/user-settings/@krassowski/plugin.jupyterlab-settings
 COPY --chown=${USER}:${USER} .emacs /home/${USER}/.emacs
